@@ -1,0 +1,6 @@
+.vs/
+*.vsix
+*.vscode/
+*.log
+*.tmp
+*.swp

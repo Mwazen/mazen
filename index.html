@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            transition: background-color 1s ease;
+        }
+
+        #timer {
+            font-size: 5rem;
+        }
+
+        #message {
+            display: none;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff007f;
+            text-shadow: 2px 2px 5px #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">100</div>
+    <div id="message">I LOVE U GAMOLE</div>
+    <script>
+        let countdown = 100;
+        const timerElement = document.getElementById('timer');
+        const messageElement = document.getElementById('message');
+
+        const interval = setInterval(() => {
+            countdown--;
+            timerElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(interval);
+                document.body.style.backgroundColor = 'white';
+                messageElement.style.display = 'block';
+                showBalloons();
+                playSound();
+            }
+        }, 50);
+
+        function showBalloons() {
+            for (let i = 0; i < 10; i++) {
+                let balloon = document.createElement('div');
+                balloon.style.position = 'absolute';
+                balloon.style.width = '50px';
+                balloon.style.height = '70px';
+                balloon.style.backgroundColor = getRandomColor();
+                balloon.style.borderRadius = '50%';
+                balloon.style.left = `${Math.random() * 100}vw`;
+                balloon.style.bottom = '0';
+                balloon.style.transition = 'transform 3s ease-out';
+                document.body.appendChild(balloon);
+
+                setTimeout(() => {
+                    balloon.style.transform = `translateY(-${Math.random() * 100}vh)`;
+                }, 100);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function playSound() {
+            const audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+            audio.play();
+        }
+    </script>
+</body>
+</html>
